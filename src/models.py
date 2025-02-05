@@ -8,7 +8,6 @@ class User(db.Model):
     last_name = db.Column(db.String(15), nullable=False)
     email = db.Column(db.String(20), unique=True, nullable=False)
     password =  db.Column(db.String(10), nullable=False)
-    # favoritos= db.relationship('Favoritos', back_populates="usuario", cascade="all, delete-orphan")
     def serialize(self):
         return {"id": self.id, "name": self.name, "last_name":self.last_name, "email":self.email, "password": self.password}
 
@@ -17,8 +16,6 @@ class Planeta(db.Model):
     nombre = db.Column(db.String(20),unique=True, nullable=False)
     clima = db.Column(db.String(50), nullable=False)
     residentes = db.Column(db.String(50), nullable=False)
-    # personajes = db.relationship('Personaje', back_populates='planeta_origen')
-    # favoritos= db.relationship('Favoritos')
     def serialize(self):
         return {"id": self.id, "nombre": self.nombre, "clima":self.clima, "residentes": self.residentes}
             
@@ -28,8 +25,6 @@ class People(db.Model):
     name= db.Column(db.String(50), nullable=False)
     especie= db.Column(db.String(50), nullable=False)
     genero= db.Column(db.String(50), nullable=False)
-    # planeta_origen_id= db.Column (db.Integer, db.ForeignKey(Planeta.id))
-    # planeta_origen = db.relationship('Planeta', back_populates='people')
     def serialize(self):
         return {"id": self.id, "name": self.name, "especie": self.especie, "genero": self.genero}
     

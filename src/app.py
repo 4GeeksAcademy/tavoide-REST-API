@@ -36,7 +36,7 @@ def handle_invalid_usage(error):
 def sitemap():
     return generate_sitemap(app)
 
-@app.route('/users', methods=['GET'])
+@app.route('/Users', methods=['GET'])
 def get_users_list():
     user_db = User.query.all()
     response_body = [(user.serialize()) for user in user_db]
@@ -56,12 +56,24 @@ def get_planeta(Planeta_id):
         return jsonify({"msg": "no encontramos el planeta con ese id"}), 400
     return jsonify(planeta.serialize()), 200
 
+@app.route('/Planeta', methods=['GET'])
+def get_planeta_list():
+    planeta_db = Planeta.query.all()
+    response_body = [(planeta.serialize()) for planeta in planeta_db]
+    return jsonify(response_body), 200
+
 @app.route('/People/<int:People_id>', methods=['GET'])
 def get_people(People_id):
     people= People.query.get(People_id)
     if not people:
         return jsonify({"msg": "no encontramos al personaje"}), 400
     return jsonify(people.serialize())
+
+@app.route('/People', methods=['GET'])
+def get_peoples_list():
+    people_db = People.query.all()
+    response_body = [(people.serialize()) for people in people_db]
+    return jsonify(response_body), 200
 
 @app.route('/Favoritos', methods=['POST'])
 def add_favorito():
